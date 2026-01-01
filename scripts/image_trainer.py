@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-image-excellent
+image-excellent-1
 """
 
 import argparse
