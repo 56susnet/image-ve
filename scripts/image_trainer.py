@@ -116,35 +116,34 @@ def create_config(task_id, model_path, model_name, model_type, expected_repo_nam
         with open(config_template_path, "r") as file:
             config = toml.load(file)
 
-        # lrs_config = load_lrs_config(model_type, is_style)
-        # if lrs_config:
-        #     model_hash = hash_model(model_name)
-        #     lrs_settings = get_config_for_model(lrs_config, model_hash)
+        lrs_config = load_lrs_config(model_type, is_style)
+        if lrs_config:
+            model_hash = hash_model(model_name)
+            lrs_settings = get_config_for_model(lrs_config, model_hash)
 
-        #     if lrs_settings:
-        #         for optional_key in [
-        #             "max_grad_norm",
-        #             "prior_loss_weight",
-        #             "max_train_epochs",
-        #             "train_batch_size",
-        #             "optimizer_args",
-        #             "unet_lr",
-        #             "text_encoder_lr",
-        #             "noise_offset",
-        #             "min_snr_gamma",
-        #             "seed",
-        #             "lr_warmup_steps",
-        #             "loss_type",
-        #             "huber_c",
-        #             "huber_schedule",
-        #         ]:
-        #             if optional_key in lrs_settings:
-        #                 config[optional_key] = lrs_settings[optional_key]
-        #     else:
-        #         print(f"Warning: No LRS configuration found for model '{model_name}'", flush=True)
-        # else:
-        #     print("Warning: Could not load LRS configuration, using default values", flush=True)
-        print("Bypassing LRS Config loading to enforce manual TOML settings.", flush=True)
+            if lrs_settings:
+                for optional_key in [
+                    "max_grad_norm",
+                    "prior_loss_weight",
+                    "max_train_epochs",
+                    "train_batch_size",
+                    "optimizer_args",
+                    "unet_lr",
+                    "text_encoder_lr",
+                    "noise_offset",
+                    "min_snr_gamma",
+                    "seed",
+                    "lr_warmup_steps",
+                    "loss_type",
+                    "huber_c",
+                    "huber_schedule",
+                ]:
+                    if optional_key in lrs_settings:
+                        config[optional_key] = lrs_settings[optional_key]
+            else:
+                print(f"Warning: No LRS configuration found for model '{model_name}'", flush=True)
+        else:
+            print("Warning: Could not load LRS configuration, using default values", flush=True)
 
         # Update config
         network_config_person = {
