@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-image-excellent-1
+image-yaya
 """
 
 import argparse
@@ -15,6 +15,8 @@ import time
 import yaml
 import toml
 
+
+# Add project root to python path to import modules
 script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(script_dir)
 sys.path.append(project_root)
@@ -25,6 +27,8 @@ import trainer.utils.training_paths as train_paths
 from core.config.config_handler import save_config, save_config_toml
 from core.dataset.prepare_diffusion_dataset import prepare_dataset
 from core.models.utility_models import ImageModelType
+
+
 
 def get_model_path(path: str) -> str:
     if os.path.isdir(path):
@@ -216,28 +220,28 @@ def create_config(task_id, model_path, model_name, model_type, expected_repo_nam
 
         config_mapping = {
             228: {
-                "network_dim": 512,
-                "network_alpha": 512,
+                "network_dim": 32,
+                "network_alpha": 32,
                 "network_args": []
             },
             235: {
-                "network_dim": 512,
-                "network_alpha": 512,
+                "network_dim": 32,
+                "network_alpha": 32,
                 "network_args": ["conv_dim=4", "conv_alpha=4", "dropout=null"]
             },
             456: {
-                "network_dim": 512,
-                "network_alpha": 512,
+                "network_dim": 64,
+                "network_alpha": 64,
                 "network_args": []
             },
             467: {
-                "network_dim": 512,
-                "network_alpha": 512,
+                "network_dim": 64,
+                "network_alpha": 64,
                 "network_args": ["conv_dim=4", "conv_alpha=4", "dropout=null"]
             },
             699: {
-                "network_dim": 512,
-                "network_alpha": 512,
+                "network_dim": 96,
+                "network_alpha": 96,
                 "network_args": ["conv_dim=4", "conv_alpha=4", "dropout=null"]
             },
         }
