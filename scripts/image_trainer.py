@@ -259,9 +259,22 @@ def create_config(task_id, model_path, model_name, model_type, expected_repo_nam
             else:
                 network_config = config_mapping[network_config_person[model_name]]
 
-            config["network_dim"] = network_config["network_dim"]
-            config["network_alpha"] = network_config["network_alpha"]
-            config["network_args"] = network_config["network_args"]
+
+            # Check if config has valid network settings (not -1)
+            if config.get("network_dim", -1) != -1:
+                print(f"Using custom network_dim from config: {config['network_dim']}", flush=True)
+            else:
+                config["network_dim"] = network_config["network_dim"]
+
+            if config.get("network_alpha", -1) != -1:
+                print(f"Using custom network_alpha from config: {config['network_alpha']}", flush=True)
+            else:
+                config["network_alpha"] = network_config["network_alpha"]
+            
+            if config.get("network_args"):
+                 print(f"Using custom network_args from config: {config['network_args']}", flush=True)
+            else:
+                config["network_args"] = network_config["network_args"]
 
         config_path = os.path.join(train_cst.IMAGE_CONTAINER_CONFIG_SAVE_PATH, f"{task_id}.toml")
         save_config_toml(config, config_path)
